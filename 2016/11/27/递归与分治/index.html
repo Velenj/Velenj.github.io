@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>递归与分治 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="综述递归是一种思想，分治是一种算法。分治算法的思想是将一个较大的问题分解为若干个与原问题相似的小问题进行求解。分治算法可以用递归或者迭代的思想实现。分治法的一般步骤如下：  划分, 把问题分解为若干子问题 求解，递归求解子问题 合并，把子问题的解合并为原问题的解">
+<meta name="keywords" content="分治">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归与分治">
+<meta property="og:url" content="http://yoursite.com/2016/11/27/递归与分治/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="综述递归是一种思想，分治是一种算法。分治算法的思想是将一个较大的问题分解为若干个与原问题相似的小问题进行求解。分治算法可以用递归或者迭代的思想实现。分治法的一般步骤如下：  划分, 把问题分解为若干子问题 求解，递归求解子问题 合并，把子问题的解合并为原问题的解">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-11-27T16:21:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="递归与分治">
+<meta name="twitter:description" content="综述递归是一种思想，分治是一种算法。分治算法的思想是将一个较大的问题分解为若干个与原问题相似的小问题进行求解。分治算法可以用递归或者迭代的思想实现。分治法的一般步骤如下：  划分, 把问题分解为若干子问题 求解，递归求解子问题 合并，把子问题的解合并为原问题的解">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">MLTech</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>递归与分治</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> MLTech</span>
+                <span class="post-date sub-title">at: 2016-11-27</span>
+            </div>
+            
+                <div>
+                    
+                         <a class="tag is-post-tag" href="/tags/分治/">分治</a>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>递归是一种思想，分治是一种算法。分治算法的思想是将一个较大的问题分解为若干个与原问题相似的小问题进行求解。分治算法可以用递归或者迭代的思想实现。分治法的一般步骤如下：</p>
+<ul>
+<li>划分, 把问题分解为若干子问题</li>
+<li>求解，递归求解子问题</li>
+<li>合并，把子问题的解合并为原问题的解    </li>
+</ul>
+<a id="more"></a>
+<h2 id="经典问题"><a href="#经典问题" class="headerlink" title="经典问题"></a>经典问题</h2><p>可以采用分治法的问题有：</p>
+<ul>
+<li>棋盘覆盖问题</li>
+<li>在一个已排序数组中找到对应的元素</li>
+<li>最大最小值问题</li>
+<li>实现归并排序</li>
+<li>快速幂</li>
+<li>逆序对问题（可以借鉴归并排序求解）</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="1-棋盘覆盖问题"><a href="#1-棋盘覆盖问题" class="headerlink" title="1. 棋盘覆盖问题"></a>1. 棋盘覆盖问题</h3><ul>
+<li>划分 : 将 <math><msubsup><mi>2</mi><mi></mi><mi>n</mi></msubsup><mo>*</mo><msubsup><mi>2</mi><mi></mi><mi>n</mi></msubsup></math> 的棋盘划分为4个 <math><msubsup><mi>2</mi><mi></mi> <mi>n-1</mi></msubsup><mo></mo><msubsup><mi>2</mi><mi></mi> <mi>n-1</mi></msubsup></math>的小正方形；</li>
+<li>求解 : 其中一个小正方形里面有一个黑格子，可以进行递归求解，另外三个小正方形没有黑格子，我们可以构造黑格子，令其令其和第一个小正方形一样，然后再进行递归求解；</li>
+<li>合并 : 当n=2的时候进行解的合并，如果子问题有解则原问题也有解。</li>
+</ul>
+<h3 id="2-在一个已排序数组中找到对应的元素"><a href="#2-在一个已排序数组中找到对应的元素" class="headerlink" title="2. 在一个已排序数组中找到对应的元素"></a>2. 在一个已排序数组中找到对应的元素</h3><p>该问题也叫二分查找问题。即每次将数组的中间元素 a[mid] 和对应元素 k 比较，分三种情况：1. 若 a[mid] == k，则返回mid；否则如果 a[mid] &gt; k，则 k 在数组前半段；如果 a[mid] &lt; k，则k在数组后半段，然后进行递归求解。 </p>
+<h3 id="3-最大最小值问题"><a href="#3-最大最小值问题" class="headerlink" title="3. 最大最小值问题"></a>3. 最大最小值问题</h3><p>暂略</p>
+<h3 id="4-归并排序"><a href="#4-归并排序" class="headerlink" title="4. 归并排序"></a>4. 归并排序</h3><p>归并排序是一种自底向上的分治算法。归并排序通过分治（递归）思想接触到子问题，然后在对子问题的合并中进行求解。归并排序的分治也是对数组进行不断二分的。到达最小的子问题（只有一个元素的时候）进行合并。合并结果先保存在一个临时数组中，然后再赋值到原数组。</p>
+<h3 id="5-快速幂"><a href="#5-快速幂" class="headerlink" title="5. 快速幂"></a>5. 快速幂</h3><p>对于 <math><msubsup><mi>a</mi><mi></mi><mi>k</mi></msubsup><mo></mo></math>，分为两个子问题：</p>
+<ol>
+<li>当 k 为偶数的时候（k &amp; 1 = 0），可以写成  <math><msubsup><mi>a</mi><mi></mi><mi>k-1</mi></msubsup><mo>*</mo><msubsup><mi>a</mi><mi></mi><mi>k-1</mi></msubsup></math></li>
+<li>当 k 为奇数的时候，可以写成  <math><mo>a<em> </em></mo><msubsup><mi>a</mi><mi></mi><mi>k-1</mi></msubsup><mo></mo><msubsup><mi>a</mi><mi></mi><mi>k-1</mi></msubsup></math></li>
+</ol>
+<h3 id="6-逆序对问题"><a href="#6-逆序对问题" class="headerlink" title="6. 逆序对问题"></a>6. 逆序对问题</h3><p>只需考虑在归并排序的合并过程中，如果 a[leftLow] &gt; b[rightLow]，则说明 b[rightLow] 和 a[leftLow]… a[leftHigh] 构成逆序对，所以执行 count=  leftHigh - leftLow + 1 ;</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="1-在一个已排序数组中找到对应的元素"><a href="#1-在一个已排序数组中找到对应的元素" class="headerlink" title="1.在一个已排序数组中找到对应的元素"></a>1.在一个已排序数组中找到对应的元素</h3><p>递归实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//定义-1为没有找到指定元素，-2为异常</span></span><br><span class="line"><span class="comment">//a为已排序数组，left和right为数组上下界，k为待查找元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a==<span class="literal">NULL</span> || left&lt;<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">	<span class="keyword">if</span>(left&gt;right)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> middle=left+((right-left)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span>(a[middle]==k)</span><br><span class="line">		<span class="keyword">return</span> middle;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(a[middle]&gt;k)</span><br><span class="line">		<span class="keyword">return</span> find(a,left,middle<span class="number">-1</span>,k);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(a[middle&lt;k])</span><br><span class="line">		<span class="keyword">return</span> find(a,middle+<span class="number">1</span>,right,k);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">10</span>]=&#123;<span class="number">-1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">15</span>&#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, find(a,<span class="number">0</span>,<span class="number">9</span>,<span class="number">8</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>迭代实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//定义-1为没有找到指定元素，-2为异常</span></span><br><span class="line"><span class="comment">//a为已排序数组，n为数组元素个数，k为待查找元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>* a,<span class="keyword">int</span> n,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a!=<span class="literal">NULL</span> &amp;&amp; n&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> low=<span class="number">0</span>,high=n<span class="number">-1</span>,middle;</span><br><span class="line">		<span class="keyword">while</span>(low&lt;=high)</span><br><span class="line">		&#123;</span><br><span class="line">			middle=low+((high-low)&gt;&gt;<span class="number">1</span>);   <span class="comment">//避免溢出</span></span><br><span class="line">		</span><br><span class="line">			<span class="keyword">if</span>(a[middle]==k)</span><br><span class="line">				<span class="keyword">return</span> middle;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(a[middle]&gt;k)</span><br><span class="line">				high=middle<span class="number">-1</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(a[middle]&lt;k)</span><br><span class="line">				low=middle+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">10</span>]=&#123;<span class="number">-1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">15</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span>* b=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, find(a,<span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]),<span class="number">11</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, find(a,<span class="number">0</span>,<span class="number">11</span>),find(b,<span class="keyword">sizeof</span>(b)/<span class="keyword">sizeof</span>(b[<span class="number">0</span>]),<span class="number">11</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在用递归实现分治算法时，要注意段错误和栈溢出的问题。有的时候栈溢出不一定是递归调用太多，也可能是局部变量太大，所以建议较大的数组放在main函数外。</p>
+<h3 id="2-归并排序也是采用了分治的思想。"><a href="#2-归并排序也是采用了分治的思想。" class="headerlink" title="2. 归并排序也是采用了分治的思想。"></a>2. 归并排序也是采用了分治的思想。</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> left,<span class="keyword">int</span> middle,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>* temp=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>((right-left)*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	<span class="keyword">int</span> leftLow=left,leftHigh=middle,rightLow=middle+<span class="number">1</span>,rightHigh=right;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(leftLow &lt;=leftHigh &amp;&amp; rightLow&lt;= rightHigh)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[leftLow]&lt;= a[rightLow])</span><br><span class="line">			temp[i++]=a[leftLow++];</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			temp[i++]=a[rightLow++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(rightLow&lt;=rightHigh)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(rightLow&lt;=rightHigh)</span><br><span class="line">			temp[i++]=a[rightLow++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(leftLow&lt;= leftHigh)</span><br><span class="line">			temp[i++]=a[leftLow++];</span><br><span class="line">	&#125;</span><br><span class="line">	i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(;i&lt;right-left+<span class="number">1</span>; i++)</span><br><span class="line">		a[left+i]=temp[i];</span><br><span class="line">	<span class="built_in">free</span>(temp);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>* a,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(left&lt;right)   <span class="comment">//不能left&lt;=right，考虑临界条件</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> middle=left+((right-left)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">		mergeSort(a,left,middle);</span><br><span class="line">		mergeSort(a,middle+<span class="number">1</span>,right);</span><br><span class="line">		merge(a,left,middle,right);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[]=&#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">0</span>&#125;;</span><br><span class="line">	mergeSort(a,<span class="number">0</span>,<span class="number">8</span>);</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(;i&lt;<span class="number">9</span>;++i)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-快速幂"><a href="#3-快速幂" class="headerlink" title="3. 快速幂"></a>3. 快速幂</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(k==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(k &amp; <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> m=power(a,(k<span class="number">-1</span>)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">return</span> m * m * a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> m=power(a,(k&gt;&gt;<span class="number">1</span>));</span><br><span class="line">		<span class="keyword">return</span> m * m;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, power(<span class="number">2</span>,<span class="number">5</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        Theme by <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © John Doe 2018
+        <br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

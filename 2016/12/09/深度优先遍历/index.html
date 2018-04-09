@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>深度优先遍历 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文介绍了一下深度优先遍历（depth-first search，DFS）的框架。下面代码使用了 vector 式的邻接表，其中 G[u][i] 表示结点 u 的第 i 个子结点。每条边用（u，v）表示。">
+<meta name="keywords" content="dfs,二分图,连通分量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度优先遍历">
+<meta property="og:url" content="http://yoursite.com/2016/12/09/深度优先遍历/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文介绍了一下深度优先遍历（depth-first search，DFS）的框架。下面代码使用了 vector 式的邻接表，其中 G[u][i] 表示结点 u 的第 i 个子结点。每条边用（u，v）表示。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-12-09T11:28:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度优先遍历">
+<meta name="twitter:description" content="本文介绍了一下深度优先遍历（depth-first search，DFS）的框架。下面代码使用了 vector 式的邻接表，其中 G[u][i] 表示结点 u 的第 i 个子结点。每条边用（u，v）表示。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">MLTech</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>深度优先遍历</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> MLTech</span>
+                <span class="post-date sub-title">at: 2016-12-09</span>
+            </div>
+            
+                <div>
+                    
+                         <a class="tag is-post-tag" href="/tags/dfs/">dfs</a>
+                    
+                         <a class="tag is-post-tag" href="/tags/二分图/">二分图</a>
+                    
+                         <a class="tag is-post-tag" href="/tags/连通分量/">连通分量</a>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>本文介绍了一下深度优先遍历（depth-first search，DFS）的框架。下面代码使用了 vector 式的邻接表，其中 G[u][i] 表示结点 u 的第 i 个子结点。每条边用（u，v）表示。</p>
+<a id="more"></a>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> maxn=<span class="number">100</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];  <span class="comment">//图</span></span><br><span class="line"><span class="keyword">int</span> vis[maxn];</span><br><span class="line"></span><br><span class="line">dfs(<span class="keyword">int</span> u)</span><br><span class="line">&#123;</span><br><span class="line">    vis[u]=<span class="number">1</span>;</span><br><span class="line">    PREVISIT(u);    <span class="comment">//访问结点u之前的操作</span></span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,v=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> d=G[u].size();</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;d;++i)     <span class="comment">//枚举每条边</span></span><br><span class="line">    &#123;</span><br><span class="line">        v=G[u][i];</span><br><span class="line">        <span class="keyword">if</span>(!vis[v])  dfs(v);</span><br><span class="line">    &#125;</span><br><span class="line">    POSTVISIT(u);   <span class="comment">//访问结点u之后的操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们把相互可达的结点称为一个连通分量，则很容易用DFS在线性时间内求出任意无向图的连通分量。下面代码为每个结点计算出了该结点所属的连通分量编号。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_cc</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    current_cc=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">0</span>;u&lt;n;u++)    <span class="comment">//依次检查图中的每个结点</span></span><br><span class="line">        <span class="keyword">if</span>(!vis[u])</span><br><span class="line">        &#123;</span><br><span class="line">            current_cc++;  <span class="comment">//如果结点u没有被访问过，意味着它属于一个新的连通分量</span></span><br><span class="line">            dfs(u);  <span class="comment">//从结点u开始DFS可以访问到它所在的整个连通分量</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里current_cc表示当前连通分量的编号。如果要记录每个结点的连通分量编号，需要在PREVISIT(u) 中赋值cc[u]=current_cc。</p>
+<p>如果我们只需要求连通分量，可以使用并查集，不需要保存图，只需按照某种顺序处理所有的边。</p>
+<h4 id="二分图的判定"><a href="#二分图的判定" class="headerlink" title="二分图的判定"></a>二分图的判定</h4><p>对于无向图 G=(V,E)，如果可以把结点集分成不相交的两部分，即 X 和 Y=V-X，使得每条边的其中一个端点在X中，另一个端点在Y中，则称 G 是二分图（bipartite graph）。 二分图的另一种说法是，可以把每个结点着以黑色和白色之一，是的每条边的两个端点颜色不同。不难发现，非连通的图是二分图当且仅当每个连通分量都是二分图，因此我们只需考虑无向连通图。</p>
+<p>下面我们用 DFS 给任意无向图 G 进行黑白二着色。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> color[maxn];   <span class="comment">//调用函数之前color数组清零</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//判断结点u所在的连通分量是否为二分图</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">bipartite</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].size();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v=G[u][i]; 		<span class="comment">//枚举每条边</span></span><br><span class="line">        <span class="keyword">if</span>(color[v]==color[u])  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(!color[v])</span><br><span class="line">        &#123;</span><br><span class="line">            color[v]=<span class="number">3</span>-color[u];</span><br><span class="line">            <span class="keyword">if</span>(!bipartite(v))  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>摘自白书。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        Theme by <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © John Doe 2018
+        <br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

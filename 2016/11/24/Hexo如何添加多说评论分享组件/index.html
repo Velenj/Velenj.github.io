@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Hexo如何添加多说评论分享组件 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="添加多说组件，让每个人听到你的声音。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo如何添加多说评论分享组件">
+<meta property="og:url" content="http://yoursite.com/2016/11/24/Hexo如何添加多说评论分享组件/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="添加多说组件，让每个人听到你的声音。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/duoshuo0.png">
+<meta property="og:image" content="http://yoursite.com/images/duoshuo1.png">
+<meta property="og:image" content="http://yoursite.com/images/duoshuo2.png">
+<meta property="og:updated_time" content="2016-12-07T08:49:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo如何添加多说评论分享组件">
+<meta name="twitter:description" content="添加多说组件，让每个人听到你的声音。">
+<meta name="twitter:image" content="http://yoursite.com/images/duoshuo0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">MLTech</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Hexo如何添加多说评论分享组件</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> MLTech</span>
+                <span class="post-date sub-title">at: 2016-11-24</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>添加多说组件，让每个人听到你的声音。</p>
+<a id="more"></a>
+<h1 id="添加多说评论"><a href="#添加多说评论" class="headerlink" title="添加多说评论"></a>添加多说评论</h1><p>在站点配置文件_config.yml（根目录下）中添加多说的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">duoshuo_shortname: 你站点的short_name  #申请多说评论组件时设置的</span><br></pre></td></tr></table></figure>
+<p>然后在themes\landscape\layout_partial\article.ejs文件中，将</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (!<span class="attr">index</span> &amp;&amp; <span class="attr">post.comments</span> &amp;&amp; <span class="attr">config.disqus_shortname</span>)&#123; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">"comments"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"disqus_thread"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">noscript</span>&gt;</span>Please enable JavaScript to view the <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"//disqus.com/?ref_noscript"</span>&gt;</span>comments powered by Disqus.<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+<p>替换成</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (!<span class="attr">index</span> &amp;&amp; <span class="attr">post.comments</span> &amp;&amp; <span class="attr">config.duoshuo_shortname</span>)&#123; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">"comments"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 多说评论框 start --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ds-thread"</span> <span class="attr">data-thread-key</span>=<span class="string">"&lt;%= post.layout %&gt;-&lt;%= post.slug %&gt;"</span> <span class="attr">data-title</span>=<span class="string">"&lt;%= post.title %&gt;"</span> <span class="attr">data-url</span>=<span class="string">"&lt;%= page.permalink %&gt;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 多说评论框 end --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="xml">    var duoshuoQuery = &#123;short_name:'<span class="tag">&lt;<span class="name">%=</span> <span class="attr">config.duoshuo_shortname</span> %&gt;</span>'&#125;;</span></span><br><span class="line"><span class="undefined">      (function() &#123;</span></span><br><span class="line"><span class="undefined">        var ds = document.createElement('script');</span></span><br><span class="line"><span class="undefined">        ds.type = 'text/javascript';ds.async = true;</span></span><br><span class="line"><span class="undefined">        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';</span></span><br><span class="line"><span class="undefined">        ds.charset = 'UTF-8';</span></span><br><span class="line"><span class="undefined">        (document.getElementsByTagName('head')[0] </span></span><br><span class="line"><span class="undefined">         || document.getElementsByTagName('body')[0]).appendChild(ds);</span></span><br><span class="line"><span class="undefined">      &#125;)();</span></span><br><span class="line"><span class="undefined">      </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="添加多说分享"><a href="#添加多说分享" class="headerlink" title="添加多说分享"></a>添加多说分享</h1><p>在多说后台管理的左栏，有一个“+”的图标，复制右边面板的代码。粘贴到themes\landscape\layout_partial\article.ejs文件的 <code>&lt;footer&gt; &lt;\footer&gt;</code> 标签中。</p>
+<p><img src="/images/duoshuo0.png" alt=""></p>
+<p>如下图所示：</p>
+<p><img src="/images/duoshuo1.png" alt=""></p>
+<p>被我注释掉的是Disqus（Hexo默认的评论插件），关于data-thread-key等参数的值和多说评论代码的值一样，直接照我的写就好了；data-images和data-content的值我没细看，应该也是post.xx，感兴趣可以看一下post文件。</p>
+<p>当添加了多说分享组件之后，会发现它会出现在home首页-每篇文章的摘要下面（关于如何设置摘要见下面），这是不科学的，所以我只想让它出现在每篇文章中。</p>
+<p>Hexo设置摘要是通过 <code>&lt;!--more--&gt;</code> 实现的，如图标注1。你只需要在你的文章中添加此标志，则该标志之前的内容会被当做摘要。</p>
+<p><img src="/images/duoshuo2.png" alt=""></p>
+<p>所以我在文件起始处定义了一个flag=0（标志3），当文章需要显示摘要的时候（即打开home首页），设置flag=1（标志2）；设置当flag==0的时候，加载多说分享组件（见第二幅图标志1）。如此便实现了显示全文加载多说分享组件，显示摘要不加载组件的功能。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        Theme by <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © John Doe 2018
+        <br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

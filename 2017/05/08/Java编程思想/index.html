@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java编程思想 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍一些Java语言的细节。 thisthis关键字只能在方法内部使用，表示对“调用这个方法的对象”的引用。如果在同一个方法内部调用同一个类的另一个方法，不必使用this。返回对当前对象的引用有的时候是一种有效的方法。经常在构造器中使用this。 staticstatic方法就是没有this的方法。在static方法的内部不能调用非静态方法，反过来是可以的。通过类本身调用static方法，实际上正">
+<meta name="keywords" content="Java编程思想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想">
+<meta property="og:url" content="http://yoursite.com/2017/05/08/Java编程思想/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍一些Java语言的细节。 thisthis关键字只能在方法内部使用，表示对“调用这个方法的对象”的引用。如果在同一个方法内部调用同一个类的另一个方法，不必使用this。返回对当前对象的引用有的时候是一种有效的方法。经常在构造器中使用this。 staticstatic方法就是没有this的方法。在static方法的内部不能调用非静态方法，反过来是可以的。通过类本身调用static方法，实际上正">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-05-09T11:12:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java编程思想">
+<meta name="twitter:description" content="介绍一些Java语言的细节。 thisthis关键字只能在方法内部使用，表示对“调用这个方法的对象”的引用。如果在同一个方法内部调用同一个类的另一个方法，不必使用this。返回对当前对象的引用有的时候是一种有效的方法。经常在构造器中使用this。 staticstatic方法就是没有this的方法。在static方法的内部不能调用非静态方法，反过来是可以的。通过类本身调用static方法，实际上正">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">MLTech</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java编程思想</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> MLTech</span>
+                <span class="post-date sub-title">at: 2017-05-08</span>
+            </div>
+            
+                <div>
+                    
+                         <a class="tag is-post-tag" href="/tags/Java编程思想/">Java编程思想</a>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>介绍一些Java语言的细节。</p>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>this关键字只能在方法内部使用，表示对“调用这个方法的对象”的引用。如果在同一个方法内部调用同一个类的另一个方法，不必使用this。<strong>返回对当前对象的引用</strong>有的时候是一种有效的方法。经常在构造器中使用this。</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>static方法就是没有this的方法。在static方法的内部不能调用非静态方法，反过来是可以的。通过类本身调用static方法，实际上正是static方法的主要用途。</p>
+<p>static确实具有全局语义。如果代码中出现大量的static方法，就该重新考虑自己的设计了。</p>
+<p>无论创建多少个对象，静态数据都只占用一份内存区域。static关键字不能应用于局部变量，因此它只能作用于域（类的成员变量）。</p>
+<p>构造器是静态方法。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>Java尽量保证，所有变量在使用前都能得到恰当的初始化。</p>
+<p>对于方法的局部变量，Java以编译时错误的形式来贯彻这种保证。</p>
+<p>对于类的数据成员则略有不同。如果类的数据成员是基本类型，则会被赋予一个初始值。</p>
+<ul>
+<li>boolean -&gt; false</li>
+<li>char -&gt; 0（显示为空白）</li>
+<li>byte/short/int/long -&gt; 0</li>
+<li>float/double -&gt; 0.0</li>
+<li>对象引用 -&gt; null</li>
+</ul>
+<h3 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h3><p>Set 转 String[]：</p>
+<p><code>String[] array = set.toArray(new String[0]);</code></p>
+<p>但是这通常不是好的，摘自stackoverflow:</p>
+<blockquote>
+<p>When you pass toArray() an array of too small size, the toArray() method has to construct a new array of the right size using reflection. This has significantly worse performance than passing in an array of at least the size of the collection itself. Therefore [0] should be replaced with [myset.size()] as in the accepted answer.</p>
+</blockquote>
+<p><code>String[] array = set.toArray(new String[set.size()]);</code></p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        Theme by <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © John Doe 2018
+        <br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

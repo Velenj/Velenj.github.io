@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>介绍几个ML工具 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先介绍数据流挖掘工具。MOA (MASSIVE ONLINE ANALYSIS)MOA is the most popular open source framework for data stream mining, with a very active growing community (blog). It includes a collection of machine learning">
+<meta name="keywords" content="机器学习工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="介绍几个ML工具">
+<meta property="og:url" content="http://yoursite.com/2017/04/19/介绍几个ML工具/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="首先介绍数据流挖掘工具。MOA (MASSIVE ONLINE ANALYSIS)MOA is the most popular open source framework for data stream mining, with a very active growing community (blog). It includes a collection of machine learning">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-04-19T07:05:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="介绍几个ML工具">
+<meta name="twitter:description" content="首先介绍数据流挖掘工具。MOA (MASSIVE ONLINE ANALYSIS)MOA is the most popular open source framework for data stream mining, with a very active growing community (blog). It includes a collection of machine learning">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">MLTech</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about/Intro">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>介绍几个ML工具</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> MLTech</span>
+                <span class="post-date sub-title">at: 2017-04-19</span>
+            </div>
+            
+                <div>
+                    
+                         <a class="tag is-post-tag" href="/tags/机器学习工具/">机器学习工具</a>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h3 id="首先介绍数据流挖掘工具。"><a href="#首先介绍数据流挖掘工具。" class="headerlink" title="首先介绍数据流挖掘工具。"></a>首先介绍数据流挖掘工具。</h3><h4 id="MOA-MASSIVE-ONLINE-ANALYSIS"><a href="#MOA-MASSIVE-ONLINE-ANALYSIS" class="headerlink" title="MOA (MASSIVE ONLINE ANALYSIS)"></a>MOA (MASSIVE ONLINE ANALYSIS)</h4><p>MOA is the most popular open source framework for data stream mining, with a very active growing community (blog). It includes a collection of machine learning algorithms (classification, regression, clustering, outlier detection, concept drift detection and recommender systems) and tools for evaluation. Related to the <strong>WEKA</strong> project, MOA is also written in <strong>Java</strong>, while scaling to more demanding problems.</p>
+<p>链接：<a href="http://moa.cms.waikato.ac.nz/。" target="_blank" rel="noopener">http://moa.cms.waikato.ac.nz/。</a></p>
+<h4 id="WEKA"><a href="#WEKA" class="headerlink" title="WEKA"></a>WEKA</h4><p><strong>Weka</strong> is a collection of machine learning algorithms for data mining tasks. The algorithms can either be applied directly to a dataset or called from your own Java code. Weka contains tools for data pre-processing, classification, regression, clustering, association rules, and visualization. It is also well-suited for developing new machine learning schemes.</p>
+<p>声明一下：WEKA是有可视化分析工具的。</p>
+<p>链接：<a href="http://www.cs.waikato.ac.nz/ml/weka/。" target="_blank" rel="noopener">http://www.cs.waikato.ac.nz/ml/weka/。</a></p>
+<p>如果想在项目中使用WEKA，需要下载Linux平台的weka，找到weka.jar即可。</p>
+<h3 id="接下来介绍一些常用的工具。"><a href="#接下来介绍一些常用的工具。" class="headerlink" title="接下来介绍一些常用的工具。"></a>接下来介绍一些常用的工具。</h3><h4 id="scikit-learn"><a href="#scikit-learn" class="headerlink" title="scikit-learn"></a>scikit-learn</h4><p>Scikit-learn (formerly scikits.learn) is a free software machine learning library for the <strong>Python</strong> programming language.</p>
+<ul>
+<li>Simple and efficient tools for data mining and data analysis</li>
+<li>Accessible to everybody, and reusable in various contexts</li>
+<li>Built on NumPy, SciPy, and matplotlib</li>
+<li>Open source, commercially usable - BSD license</li>
+</ul>
+<p>链接：<a href="http://scikit-learn.org/stable/index.html。" target="_blank" rel="noopener">http://scikit-learn.org/stable/index.html。</a></p>
+<h4 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h4><p>NumPy is the fundamental package for scientific computing with Python. It contains among other things:</p>
+<ul>
+<li>a powerful N-dimensional array object</li>
+<li>sophisticated (broadcasting) functions</li>
+<li>tools for integrating C/C++ and Fortran code</li>
+<li>useful linear algebra, Fourier transform, and random number capabilities</li>
+</ul>
+<p>Besides its obvious scientific uses, NumPy can also be used as an efficient multi-dimensional container of generic data. Arbitrary data-types can be defined. This allows NumPy to seamlessly and speedily integrate with a wide variety of databases.</p>
+<h4 id="SciPy"><a href="#SciPy" class="headerlink" title="SciPy"></a>SciPy</h4><p>SciPy is a series of Scientific Computing Tools for Python. It refers to several related but distinct entities:</p>
+<ul>
+<li>The SciPy Stack, a collection of open source software for scientific computing in Python, and particularly a specified set of core packages.</li>
+<li>The community of people who use and develop this stack.</li>
+<li>Several conferences dedicated to scientific computing in Python - SciPy, EuroSciPy and SciPy.in.</li>
+<li>The SciPy library, one component of the SciPy stack, providing many numerical routines.</li>
+</ul>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        Theme by <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © John Doe 2018
+        <br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
